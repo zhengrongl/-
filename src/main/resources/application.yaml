@@ -1,0 +1,54 @@
+#配置端口号
+server:
+  port: 9090
+
+#配置驱动
+spring:
+  datasource:
+    #连接驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #连接数据库url
+    url: jdbc:mysql://localhost:3306/vue_oa?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    #账号
+    username: root
+    #密码
+    password: 123456
+    #配置连接池druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid 数据源专有配置
+    #Spring Boot默认是不注入这些属性值的，需要自己绑定
+    #durid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActice: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1　FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+    #配置监控统计拦截的filters，stat：监控统计、log4j：日记记录、wall：防御sql注入
+    #如果允许时报错  java.lang.ClassNotFoundExceptionn: org.apache.log4j.Priority
+    #则导入 log4j 依赖即可，maven地址：https://mvnrepository.com/artifact/log4j/log4j
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobaDataSourcestat: true
+    connectionProperties: druid.stat.meregeSql=true;druid.stat.slowSqlMillis=500
+
+
+
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#Mybatis-puls配置
+mybatis-plus:
+  type-aliases-package: com.xiaoliu.boot_vue.entity #配置实体类别名
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置log日志输出
+
+#file文件
+files:
+  upload:
+    path: D:\图片\files\
